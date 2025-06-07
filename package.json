@@ -1,0 +1,26 @@
+{
+  "name": "tsc-compiler",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npx tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "npx prettier . --write src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/"
+  },
+  "author": "Dallin Pool",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/"
+  },
+  "homepage": "https://github.com/",
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "prettier": "3.5.3",
+    "typescript": "^5.8.3"
+  }
+}
