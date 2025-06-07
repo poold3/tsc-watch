@@ -4,10 +4,11 @@ import ts from "typescript";
 const args = process.argv;
 
 const preOptionIndex = args.findIndex((arg) => arg === "--pre");
-const preScript: string | undefined = args[preOptionIndex + 1];
+const preScript = preOptionIndex !== -1 ? args[preOptionIndex + 1] : undefined;
 
 const postOptionIndex = args.findIndex((arg) => arg === "--post");
-const postScript: string | undefined = args[postOptionIndex + 1];
+const postScript =
+  postOptionIndex !== -1 ? args[postOptionIndex + 1] : undefined;
 
 const formatHost: ts.FormatDiagnosticsHost = {
   getCurrentDirectory: ts.sys.getCurrentDirectory,
