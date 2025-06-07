@@ -1,7 +1,10 @@
-import { exec } from "child_process";
+import { execFileSync } from "child_process";
 import ts from "typescript";
 
 const args = process.argv;
+
+const rootIndex = args.findIndex((arg) => arg === "--root");
+const root = rootIndex !== -1 ? args[rootIndex + 1] : "./";
 
 const preOptionIndex = args.findIndex((arg) => arg === "--pre");
 const preScript = preOptionIndex !== -1 ? args[preOptionIndex + 1] : undefined;
@@ -53,17 +56,15 @@ function watch() {
 }
 
 function execute(script: string) {
-  exec(`node ${script}`, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-    }
-    console.log(stdout);
-    console.error(stderr);
-  });
+  try {
+    execFileSync("node", [script], { stdio: "inherit" });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function getConfig(): string {
-  const config = ts.findConfigFile("./", ts.sys.fileExists, "tsconfig.json");
+  const config = ts.findConfigFile(root, ts.sys.fileExists, "tsconfig.json");
   if (!config) {
     throw new Error('Could not find "tsconfig.json"!');
   }
